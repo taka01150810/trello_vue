@@ -4,7 +4,7 @@
     <main>
       <p class="info-line">All: {{ totalCardCount }} tasks</p>
       <div class="list-index">
-        <draggable :list="lists" class="list-index">
+        <draggable :list="lists" @end="movingList" class="list-index">
           <!-- 
           Listコンポーネントに必要なデータを渡している 
           「:」はv-bindの省略
@@ -52,6 +52,9 @@ export default {
   },
   methods: {
     movingCard: function () {
+      this.$store.dispatch("updateList", { lists: this.lists });
+    },
+    movingList: function () {
       this.$store.dispatch("updateList", { lists: this.lists });
     },
   },
