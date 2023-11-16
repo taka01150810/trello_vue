@@ -8,7 +8,9 @@
       @focusin="startEditing"
       @focusout="finishEditing"
     />
-    <button type="submit" class="add-button">追加</button>
+    <button type="submit" class="add-button" v-if="isEditing || bodyExists">
+      追加
+    </button>
   </form>
 </template>
 <script>
@@ -32,7 +34,13 @@ export default {
       if (this.isEditing) {
         classList.push("active");
       }
+      if (this.bodyExists) {
+        classList.push("addable");
+      }
       return classList;
+    },
+    bodyExists() {
+      return this.body.length > 0;
     },
   },
   methods: {

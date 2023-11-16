@@ -179,3 +179,9 @@ main {
   pointer-events: auto;
   cursor: pointer;
 }
+
+.addable .add-button {
+  background-color: #00d78f;
+  pointer-events: auto;
+  cursor: pointer;
+}
