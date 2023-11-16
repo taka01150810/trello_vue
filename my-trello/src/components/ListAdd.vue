@@ -14,7 +14,9 @@
       @focusin="startEditing"
       @focusout="finishEditing"
     />
-    <button type="submit" class="add-button">追加</button>
+    <button type="submit" class="add-button" v-if="isEditing || titleExists">
+      追加
+    </button>
   </form>
 </template>
 <script>
@@ -30,9 +32,17 @@ export default {
     classList() {
       const classList = ["addlist"];
       if (this.isEditing) {
+        // activeはグレー
         classList.push("active");
       }
+      if (this.titleExists) {
+        // addableは緑
+        classList.push("addable");
+      }
       return classList;
+    },
+    titleExists() {
+      return this.title.length > 0;
     },
   },
   methods: {
