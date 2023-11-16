@@ -5,7 +5,11 @@
       <p class="list-counter">total: {{ totalCardInList }}</p>
       <div class="deletelist" @click="removeList">×</div>
     </div>
-    <draggable>
+    <!-- 
+        group属性を使うことで他のコンポーネントへドラッグ&ドロップさせる、
+        または他のコンポーネントからのドラッグ&ドロップを受け付けることができます。 
+    -->
+    <draggable group="cards">
       <card
         v-for="(item, index) in cards"
         :body="item.body"
