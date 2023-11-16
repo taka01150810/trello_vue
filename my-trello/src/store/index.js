@@ -36,6 +36,9 @@ const store = new Vuex.Store({
     addlist(state, payload) {
       state.lists.push({ title: payload.title, cards: [] });
     },
+    removelist(state, payload) {
+      state.lists.splice(payload.listIndex, 1);
+    },
   },
   // Mutationを実行(commit)する
   actions: {
@@ -43,6 +46,9 @@ const store = new Vuex.Store({
     // 第二引数には、mutationsに渡す引数を指定することができる
     addlist(context, payload) {
       context.commit("addlist", payload);
+    },
+    removelist(context, payload) {
+      context.commit("removelist", payload);
     },
   },
   modules: {},
