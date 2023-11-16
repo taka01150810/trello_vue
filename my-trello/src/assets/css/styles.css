@@ -169,3 +169,7 @@ main {
   width: 100%;
   word-wrap: break-word;
 }
+
+.active .text-input {
+  background-color: #fff;
+}
