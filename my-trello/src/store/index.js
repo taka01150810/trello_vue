@@ -63,6 +63,15 @@ const store = new Vuex.Store({
       context.commit("removeCardFromList", payload);
     },
   },
+  getters: {
+    // 第一引数にstate、第二引数に他のgettersを受け取ることができる
+    // 他のgettersで算出したものから、さらに何か算出したいという実装も可能
+    totalCardCount(state) {
+      let count = 0;
+      state.lists.map((content) => (count += content.cards.length));
+      return count;
+    },
+  },
   modules: {},
 });
 

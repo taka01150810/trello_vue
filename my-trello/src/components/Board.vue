@@ -2,7 +2,7 @@
   <div>
     <header>my Trello</header>
     <main>
-      <p class="info-line">All: 0 tasks</p>
+      <p class="info-line">All: {{ totalCardCount }} tasks</p>
       <div class="list-index">
         <!-- 
           Listコンポーネントに必要なデータを渡している 
@@ -40,6 +40,10 @@ export default {
     2. computedにストアのstateからのデータと、ローカルでの算出データを両方定義する場合には、「...」を書く必要がある
     */
     ...mapState(["lists"]),
+    totalCardCount() {
+      // stateのデータから算出したものをコンポーネントで取得したいときにgettersを使う。
+      return this.$store.getters.totalCardCount;
+    },
   },
 };
 </script>
