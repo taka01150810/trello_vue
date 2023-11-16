@@ -3,9 +3,28 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+// localStorageに保存したリストを取得
+const savedLists = localStorage.getItem("trello-lists");
+
+const store = new Vuex.Store({
   state: {
-    lists: [],
+    // localStorageに保存されたリストがあれば取得、なければデフォルトのリスト配列を設置
+    lists: savedLists
+      ? JSON.parse(savedLists)
+      : [
+          {
+            title: "Backlog",
+            cards: [{ body: "English" }, { body: "Mathematics" }],
+          },
+          {
+            title: "Todo",
+            cards: [{ body: "Science" }],
+          },
+          {
+            title: "Doing",
+            cards: [],
+          },
+        ],
   },
   // stateを更新する。(唯一更新できる)
   /*
@@ -28,3 +47,12 @@ export default new Vuex.Store({
   },
   modules: {},
 });
+
+// データの状態を更新後にlocalStorageへデータの状態を保存
+// subscribeはストアのインスタンスメソッドで全てのmutationの後に呼ばれます。
+// 第一引数にmutationインスタンス、第二引数にmutation後のデータの状態を受け取る。
+store.subscribe((mutation, state) => {
+  localStorage.setItem("trello-lists", JSON.stringify(state.lists));
+});
+
+export default store;
